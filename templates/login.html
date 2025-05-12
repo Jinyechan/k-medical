@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>로그인 및 회원가입</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #f7f7f7;
+            margin: 0;
+        }
+
+        .header {
+            background-color: #1abc9c;
+            color: white;
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .header h1 {
+            font-size: 1.8rem;
+            margin: 0;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 15px;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-size: 1rem;
+        }
+
+        .nav-links a:hover {
+            text-decoration: underline;
+        }
+
+        .password-container {
+            position: relative;
+        }
+
+        .toggle-password {
+            position: absolute;
+            right: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            cursor: pointer;
+        }
+
+        .signup-section {
+            display: none;
+        }
+
+        .terms-section {
+            background: none;
+            padding: 20px;
+            color: #2c3e50;
+            line-height: 1.6;
+        }
+
+        .btn-custom {
+            border-radius: 20px;
+            font-weight: bold;
+        }
+
+        .btn-custom-primary {
+            background: #34495e;
+            color: white;
+        }
+
+        .btn-custom-primary:hover {
+            background: #2c3e50;
+        }
+
+        .btn-custom-secondary {
+            background: #27ae60;
+            color: white;
+        }
+
+        .btn-custom-secondary:hover {
+            background: #1e8449;
+        }
+    </style>
+</head>
+
+<body>
+    <header class="header">
+        <h1>K-MEDICAL</h1>
+        <nav class="nav-links">
+            <a href="/">홈화면으로 돌아가기</a>
+        </nav>
+    </header>
+
+    <section class="py-5">
+        <div class="text-center mb-4">
+            <h2 id="login-header" class="text-dark">로그인</h2>
+        </div>
+        <form id="login-form" class="d-flex flex-column align-items-center">
+            <input name="username" type="text" id="login-username" class="form-control my-3 w-50" placeholder="아이디"
+                required>
+            <div class="password-container w-50">
+                <input name="password" type="password" id="login-password" class="form-control my-3" placeholder="비밀번호"
+                    required>
+                <span class="toggle-password">👁️</span>
+            </div>
+            <button type="submit" class="btn btn-custom btn-custom-primary w-50 py-2">로그인</button>
+        </form>
+        <div class="text-center mt-3">
+            <button id="show-signup" class="btn btn-link">회원가입</button>
+        </div>
+    </section>
+
+    <section id="signup-section" class="py-5" style="display: none;">
+        <div class="text-center mb-4">
+            <h2 id="signup-header" class="text-dark">회원가입</h2>
+        </div>
+        <form id="signup-form" class="d-flex flex-column align-items-center" action="/signup" method="post">
+            <input type="text" name="username" class="form-control my-3 w-50" placeholder="아이디" required>
+            <div class="password-container w-50">
+                <input type="password" name="password" id="signup-password" class="form-control my-3" placeholder="비밀번호"
+                    required>
+                <span class="toggle-password">👁️</span>
+            </div>
+            <div class="password-container w-50">
+                <input type="password" name="confirm_password" id="confirm-password" class="form-control my-3"
+                    placeholder="비밀번호 확인" required>
+                <span class="toggle-password">👁️</span>
+            </div>
+            <input type="email" name="email" class="form-control my-3 w-50" placeholder="이메일" required>
+            <input type="text" name="diet" class="form-control my-3 w-50" placeholder="식습관 (예: 채식, 일반)" required>
+            <input type="text" name="location" class="form-control my-3 w-50" placeholder="거주 지역" required>
+            <input type="number" name="height" id="height" class="form-control my-3 w-50" placeholder="키 (cm)" required>
+            <input type="number" name="weight" id="weight" class="form-control my-3 w-50" placeholder="몸무게 (kg)"
+                required>
+            <textarea name="family_history" class="form-control my-3 w-50" placeholder="가족 병력 (선택 사항)"></textarea>
+            <div class="terms-section my-4">
+                <h3 class="text-center mb-3">개인정보 이용약관</h3>
+                <div class="terms-box">
+                    <h5><strong>제1장: 개인정보 처리 방침</strong></h5>
+                    <p>본 약관은 개인정보 보호법 및 관련 법령에 따라 작성되었으며, 회원의 소중한 개인정보를 보호하고 안전하게 처리하기 위해 다음과 같은 원칙을 준수합니다:</p>
+
+                    <h5><strong>제2장: 개인정보 수집 및 이용 목적</strong></h5>
+                    <ol>
+                        <li>회원 인증 및 로그인 기능 제공.</li>
+                        <li>개인 맞춤형 건강 정보 및 서비스 제공.</li>
+                        <li>BMI 계산 및 건강관리 추천 서비스 활용.</li>
+                        <li>회원과의 커뮤니케이션을 위한 이메일 및 연락처 정보 사용.</li>
+                        <li>내부 데이터 분석 및 서비스 개선.</li>
+                    </ol>
+
+                    <h5><strong>제3장: 수집하는 개인정보 항목</strong></h5>
+                    <p>필수 항목:</p>
+                    <ul>
+                        <li>아이디</li>
+                        <li>비밀번호</li>
+                        <li>이메일</li>
+                        <li>키</li>
+                        <li>몸무게</li>
+                        <li>식습관</li>
+                    </ul>
+                    <p>선택 항목:</p>
+                    <ul>
+                        <li>가족 병력</li>
+                    </ul>
+
+                    <h5><strong>제4장: 개인정보의 보유 및 파기</strong></h5>
+                    <ol>
+                        <li>회원 탈퇴 시 즉시 모든 개인정보를 파기합니다.</li>
+                        <li>관련 법령에서 요구하는 경우, 해당 기간 동안 개인정보를 안전하게 보관합니다.</li>
+                        <li>전자적 파일 형태의 정보는 복구 불가능한 방법으로 영구 삭제하며, 종이 문서는 분쇄기로 파기합니다.</li>
+                    </ol>
+
+                    <h5><strong>제5장: 개인정보의 제3자 제공</strong></h5>
+                    <p>회원의 동의 없이 개인정보를 제3자에게 제공하지 않으며, 다음의 경우에만 제공할 수 있습니다:</p>
+                    <ul>
+                        <li>법령에서 요구하는 경우.</li>
+                        <li>회원의 동의를 받은 경우.</li>
+                    </ul>
+
+                    <h5><strong>제6장: 개인정보의 안전성 확보 조치</strong></h5>
+                    <ol>
+                        <li>SSL 암호화 기술을 사용하여 데이터 전송 보호.</li>
+                        <li>중요 정보는 암호화하여 저장.</li>
+                        <li>내부적으로 데이터 접근 권한을 제한.</li>
+                        <li>정기적인 보안 점검 및 침입 탐지 시스템 운영.</li>
+                    </ol>
+
+                    <h5><strong>제7장: 회원의 권리</strong></h5>
+                    <p>회원은 언제든지 본인의 개인정보에 대해 다음과 같은 권리를 행사할 수 있습니다:</p>
+                    <ul>
+                        <li>개인정보 열람 요청</li>
+                        <li>개인정보 수정 요청</li>
+                        <li>개인정보 삭제 요청</li>
+                        <li>개인정보 처리 제한 요청</li>
+                    </ul>
+
+                    <h5><strong>제8장: 문의</strong></h5>
+                    <p>개인정보 관련 문의 사항은 아래의 연락처로 문의해 주시기 바랍니다:</p>
+                    <ul>
+                        <li>이메일: jinstartup@gmail.com</li>
+                        <li>운영 시간: 평일 09:00 - 18:00</li>
+                    </ul>
+                </div>
+                <div class="form-check mt-3">
+                    <input type="radio" name="terms" id="agree" class="form-check-input" required>
+                    <label for="agree" class="form-check-label">동의함</label>
+                </div>
+                <div class="form-check">
+                    <input type="radio" name="terms" id="disagree" class="form-check-input">
+                    <label for="disagree" class="form-check-label">동의안함</label>
+                </div>
+            </div>
+
+            <style>
+                .terms-box {
+                    background: #ffffff;
+                    border-radius: 10px;
+                    padding: 15px;
+                    height: 250px;
+                    overflow-y: auto;
+                    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+                }
+
+                .terms-section h5 {
+                    color: #34495e;
+                    font-weight: bold;
+                }
+
+                .terms-section ul,
+                .terms-section ol {
+                    padding-left: 20px;
+                }
+
+                .terms-section p,
+                .terms-section li {
+                    line-height: 1.6;
+                }
+            </style>
+
+            <button type="submit" id="signup-button" class="btn btn-custom btn-custom-secondary w-50 py-2"
+                disabled>회원가입</button>
+        </form>
+        <div class="text-center mt-3">
+            <button id="back-to-login" class="btn btn-link">로그인 화면으로</button>
+        </div>
+    </section>
+
+    <script>
+        $(document).ready(function () {
+            // 로그인 처리
+            $('#login-form').on('submit', function (event) {
+                event.preventDefault();
+
+                // 입력값 가져오기
+                const username = $('#login-username').val();
+                const password = $('#login-password').val();
+
+                // AJAX 요청
+                $.ajax({
+                    url: '/login',
+                    type: 'POST',
+                    contentType: 'application/x-www-form-urlencoded', // 서버가 form 데이터를 기대함
+                    data: {
+                        username: username,
+                        password: password
+                    },
+                    success: function (response) {
+                        // 성공 메시지와 리다이렉션 처리
+                        alert(response.message);
+                        window.location.href = response.redirect;
+                    },
+                    error: function (xhr) {
+                        // 에러 핸들링 및 디버깅
+                        console.error("XHR:", xhr); // 브라우저 콘솔에 XHR 객체 출력
+                        if (xhr.responseJSON && xhr.responseJSON.error) {
+                            alert(xhr.responseJSON.error);
+                        } else {
+                            alert("알 수 없는 오류가 발생했습니다.");
+                        }
+                    }
+                });
+            });
+
+            // 회원가입 버튼 활성화
+            $('input[name="terms"]').on('change', function () {
+                if ($('#agree').is(':checked')) {
+                    $('#signup-button').prop('disabled', false);
+                } else {
+                    $('#signup-button').prop('disabled', true);
+                }
+            });
+
+            // 회원가입 처리
+            $('#signup-form').on('submit', function (event) {
+                event.preventDefault();
+
+                // AJAX 요청
+                $.ajax({
+                    url: '/signup',
+                    type: 'POST',
+                    contentType: 'application/x-www-form-urlencoded',
+                    data: $(this).serialize(),
+                    success: function (response) {
+                        // 성공 메시지와 리다이렉션 처리
+                        alert("회원가입이 완료되었습니다! 로그인 페이지로 이동합니다.");
+                        window.location.href = "/login";
+                    },
+                    error: function (xhr) {
+                        // 에러 핸들링 및 디버깅
+                        console.error("XHR:", xhr); // 브라우저 콘솔에 XHR 객체 출력
+                        if (xhr.responseJSON && xhr.responseJSON.error) {
+                            alert("회원가입 실패: " + xhr.responseJSON.error);
+                        } else {
+                            alert("회원가입 중 알 수 없는 오류가 발생했습니다.");
+                        }
+                    }
+                });
+            });
+
+            // 비밀번호 가시성 토글
+            $(".toggle-password").on("click", function () {
+                const input = $(this).prev("input");
+                const type = input.attr("type") === "password" ? "text" : "password";
+                input.attr("type", type);
+            });
+
+            // 회원가입 폼 토글
+            $("#show-signup").click(function () {
+                $("#signup-section").slideToggle();
+            });
+
+            // 로그인 화면으로 돌아가기
+            $("#back-to-login").click(function () {
+                $("#signup-section").slideUp();
+            });
+        });
+    </script>
+
+</body>
+
+</html>
